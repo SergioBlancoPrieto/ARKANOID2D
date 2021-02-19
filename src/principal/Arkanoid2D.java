@@ -1,3 +1,4 @@
+package principal;
 import java.awt.EventQueue;
 
 public class Arkanoid2D {

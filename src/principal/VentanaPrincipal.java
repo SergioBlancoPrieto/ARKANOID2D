@@ -1,3 +1,5 @@
+package principal;
+
 import javax.swing.JFrame;
 import java.awt.GridLayout;
 

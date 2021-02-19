@@ -1,6 +1,8 @@
+package principal;
+
 public class Bola extends Sprite {
 
-    Bola(int alto, int ancho, int posX, int posY, String ruta, PanelJuego juego) {
+    public Bola(int alto, int ancho, int posX, int posY, String ruta, PanelJuego juego) {
         super(alto, ancho, posX, posY, ruta, juego);
     }
     

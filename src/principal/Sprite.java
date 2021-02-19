@@ -1,3 +1,5 @@
+package principal;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -7,6 +9,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import pantallas.PantallaGameOver;
 
 public class Sprite {
 
@@ -21,7 +25,7 @@ public class Sprite {
     private PanelJuego juego;
     private JFrame ventana;
 
-    Sprite(int alto, int ancho, int posX, int posY, String ruta, PanelJuego juego) {
+    public Sprite(int alto, int ancho, int posX, int posY, String ruta, PanelJuego juego) {
         this.posX = posX;
         this.posY = posY;
         this.ancho = ancho;
@@ -31,7 +35,7 @@ public class Sprite {
         this.juego = juego;
     }
 
-    Sprite(int alto, int ancho, int posX, int posY, String ruta, PanelJuego juego, JFrame ventana) {
+    public Sprite(int alto, int ancho, int posX, int posY, String ruta, PanelJuego juego, JFrame ventana) {
         this.posX = posX;
         this.posY = posY;
         this.ancho = ancho;
@@ -66,7 +70,7 @@ public class Sprite {
         }
 
         if (posY + alto >= juego.getHeight()) {
-            juego.setGameOver(true);
+            juego.setPantallaActual(new PantallaGameOver(juego));
             velX = 0;
             velY = 0;
         }
@@ -79,17 +83,23 @@ public class Sprite {
         posY = posY + velY;
     }
 
-    public void actualizarPosicionBarra() {
+    public void actualizarPosicionBarra(Bola bola) {
         if(juego.getIzquierdaPulsado()) {
             posX = posX - 5;
             if(posX <0) {
                 posX = 0;
+            }
+            if(!juego.getEnMovimiento()) {
+                bola.setPosX(posX + 20);
             }
         }
         if(juego.getDerechaPulsado()) {
             posX = posX + 5;
             if(posX > (ventana.getWidth() - ancho - 15)) {
                 posX = ventana.getWidth() - ancho - 15;
+            }
+            if(!juego.getEnMovimiento()) {
+                bola.setPosX(posX + 20);
             }
         }
     }
