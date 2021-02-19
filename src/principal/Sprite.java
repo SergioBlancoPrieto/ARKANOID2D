@@ -84,21 +84,21 @@ public class Sprite {
     }
 
     public void actualizarPosicionBarra(Bola bola) {
-        if(juego.getIzquierdaPulsado()) {
+        if (juego.getIzquierdaPulsado()) {
             posX = posX - 5;
-            if(posX <0) {
+            if (posX < 0) {
                 posX = 0;
             }
-            if(!juego.getEnMovimiento()) {
+            if (!juego.getEnMovimiento()) {
                 bola.setPosX(posX + 20);
             }
         }
-        if(juego.getDerechaPulsado()) {
+        if (juego.getDerechaPulsado()) {
             posX = posX + 5;
-            if(posX > (ventana.getWidth() - ancho - 15)) {
+            if (posX > (ventana.getWidth() - ancho - 15)) {
                 posX = ventana.getWidth() - ancho - 15;
             }
-            if(!juego.getEnMovimiento()) {
+            if (!juego.getEnMovimiento()) {
                 bola.setPosX(posX + 20);
             }
         }

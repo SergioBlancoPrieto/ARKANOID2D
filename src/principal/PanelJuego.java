@@ -5,8 +5,6 @@ import javax.swing.JPanel;
 import pantallas.PantallaDeJuego;
 import pantallas.PantallaInicio;
 import java.awt.Graphics;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
@@ -33,17 +31,10 @@ public class PanelJuego extends JPanel implements Runnable {
 
         new Thread(this).start();
 
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent arg0) {
-                pantallaActual.PintarFondo();
-            }
-        });
-
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if(!jugando) {
+                if (!jugando) {
                     jugando = true;
                     pantallaActual = new PantallaDeJuego(estePanel);
                 }

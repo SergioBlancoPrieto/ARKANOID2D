@@ -5,11 +5,11 @@ public class Bola extends Sprite {
     public Bola(int alto, int ancho, int posX, int posY, String ruta, PanelJuego juego) {
         super(alto, ancho, posX, posY, ruta, juego);
     }
-    
+
     private boolean Colisiona(Sprite otro) {
         boolean colisionaX = false;
         Sprite izquierda, derecha, arriba, abajo;
-        if(this.getPosX() < otro.getPosX()) {
+        if (this.getPosX() < otro.getPosX()) {
             izquierda = this;
             derecha = otro;
         } else {
@@ -18,10 +18,10 @@ public class Bola extends Sprite {
         }
         colisionaX = izquierda.getPosX() + izquierda.getAncho() >= derecha.getPosX();
         boolean colisionaY;
-        if(!colisionaX) {
+        if (!colisionaX) {
             return false;
         }
-        if(this.getPosY() < otro.getPosY()) {
+        if (this.getPosY() < otro.getPosY()) {
             arriba = this;
             abajo = otro;
         } else {
@@ -35,7 +35,7 @@ public class Bola extends Sprite {
     public boolean ColisionaArriba(Sprite otro) {
         Sprite izquierda, derecha;
         if (Colisiona(otro) && this.getPosY() > otro.getPosY()) {
-            if(this.getPosX() < otro.getPosX()) {
+            if (this.getPosX() < otro.getPosX()) {
                 izquierda = this;
                 derecha = otro;
             } else {
@@ -51,7 +51,7 @@ public class Bola extends Sprite {
     public boolean ColisionaAbajo(Sprite otro) {
         Sprite izquierda, derecha;
         if (Colisiona(otro) && this.getPosY() < otro.getPosY()) {
-            if(this.getPosX() < otro.getPosX()) {
+            if (this.getPosX() < otro.getPosX()) {
                 izquierda = this;
                 derecha = otro;
             } else {
@@ -67,7 +67,7 @@ public class Bola extends Sprite {
     public boolean ColisionaDerecha(Sprite otro) {
         Sprite arriba, abajo;
         if (Colisiona(otro) && this.getPosX() > otro.getPosX()) {
-            if(this.getPosY() < otro.getPosY()) {
+            if (this.getPosY() < otro.getPosY()) {
                 arriba = this;
                 abajo = otro;
             } else {
@@ -83,7 +83,7 @@ public class Bola extends Sprite {
     public boolean ColisionaIzquierda(Sprite otro) {
         Sprite arriba, abajo;
         if (Colisiona(otro) && this.getPosX() < otro.getPosX()) {
-            if(this.getPosY() < otro.getPosY()) {
+            if (this.getPosY() < otro.getPosY()) {
                 arriba = this;
                 abajo = otro;
             } else {

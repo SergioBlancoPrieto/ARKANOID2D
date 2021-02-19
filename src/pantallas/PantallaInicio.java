@@ -17,7 +17,7 @@ public class PantallaInicio implements Pantalla {
 
     @Override
     public void InicializarPantalla() {
-        
+
     }
 
     @Override
@@ -35,20 +35,11 @@ public class PantallaInicio implements Pantalla {
 
     @Override
     public void EjecutarFrame() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void ArrancarBola() {
-        // TODO Auto-generated method stub
 
     }
-
-    @Override
-    public void PintarFondo() {
-        // TODO Auto-generated method stub
-
-    }
-    
 }

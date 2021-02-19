@@ -57,8 +57,7 @@ public class PantallaDeJuego implements Pantalla {
 
     @Override
     public void PintarPantalla(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, juego.getWidth(), juego.getHeight());
+        fondoEscalado = fondo.getScaledInstance(juego.getWidth(), juego.getHeight(), Image.SCALE_SMOOTH);
         g.drawImage(fondoEscalado, 0, 0, null);
         if (g instanceof Graphics2D) {
             g.setColor(Color.WHITE);
@@ -102,8 +101,12 @@ public class PantallaDeJuego implements Pantalla {
     }
 
     public boolean ComprobarBola(Sprite otro) {
-        if (bola.ColisionaAbajo(otro) || bola.ColisionaArriba(otro)) {
-            bola.setVelY(bola.getVelY() * -1);
+        if (bola.ColisionaAbajo(otro)) {
+            bola.setVelY(Math.abs(bola.getVelY()) * -1);
+            return true;
+        }
+        if (bola.ColisionaArriba(otro)) {
+            bola.setVelY(Math.abs(bola.getVelY()));
             return true;
         }
         if (bola.ColisionaDerecha(otro) || bola.ColisionaIzquierda(otro)) {
@@ -135,11 +138,5 @@ public class PantallaDeJuego implements Pantalla {
     public void ArrancarBola() {
         bola.setVelX(5);
         bola.setVelY(-5);
-    }
-
-    @Override
-    public void PintarFondo() {
-        fondoEscalado = fondo.getScaledInstance(juego.getWidth(), juego.getHeight(), Image.SCALE_SMOOTH);
-        juego.repaint();
     }
 }

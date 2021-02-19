@@ -38,20 +38,11 @@ public class PantallaVictoria implements Pantalla {
 
     @Override
     public void EjecutarFrame() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void ArrancarBola() {
-        // TODO Auto-generated method stub
 
     }
-
-    @Override
-    public void PintarFondo() {
-        // TODO Auto-generated method stub
-
-    }
-    
 }

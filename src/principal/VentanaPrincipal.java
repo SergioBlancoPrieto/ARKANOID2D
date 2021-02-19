@@ -22,7 +22,7 @@ public class VentanaPrincipal {
     }
 
     public void inicializarListeners() {
-        //Nada
+        // Nada
     }
 
     public void inicializar() {
