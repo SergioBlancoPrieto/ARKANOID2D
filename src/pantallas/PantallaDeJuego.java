@@ -14,25 +14,44 @@ import java.awt.Color;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.Image;
-
+/**
+ * Esta clase crea la pantalla de juego y administra todos sus componentes.
+ * 
+ * @author Sergio Blanco Prieto
+ */
 public class PantallaDeJuego implements Pantalla {
+    //Bola del arkanoid
     private Bola bola;
+    //Barra del arkanoid
     private Sprite barra;
+    //Bloques del arkanoid y las rutas de sus imágenes
     private Sprite[][] bloques;
     private String[] rutas = { "imagenes/bloque_amarillo.png", "imagenes/bloque_blanco.png", "imagenes/bloque_cian.png",
             "imagenes/bloque_morado.png", "imagenes/bloque_naranja.png", "imagenes/bloque_rojo.png",
             "imagenes/bloque_rosa.png", "imagenes/bloque_verde.png" };
+    //Referencia al panel de juego que contiene las pantallas
     private PanelJuego juego;
+    //Variables para pintar el fondo
     private BufferedImage fondo = null;
     private Image fondoEscalado;
 
+    /**
+     * Constructor de la clase que asigna la referencia al panel de juego e inicializa los componentes
+     * 
+     * @param juego : referencia al panel de juego
+     */
     public PantallaDeJuego(PanelJuego juego) {
         this.juego = juego;
         InicializarPantalla();
     }
 
+    /**
+     * Método que inicializa los componentes de la pantalla de juego
+     */
     @Override
     public void InicializarPantalla() {
+        //Se recorre la matriz de bloques y se les inicializa y asigna una imagen aleatoria del array de rutas,
+        //por lo que cada partida la combinación de colores será distinta
         bloques = new Sprite[5][4];
         Random rd = new Random();
         for (int i = 0; i < 5; i++) {
@@ -42,10 +61,12 @@ public class PantallaDeJuego implements Pantalla {
             }
         }
 
+        //Se inicializan la bola y la barra con sus respectivas imágenes
         bola = new Bola(20, 20, 190, 490, "imagenes/arkanoidball.png", juego);
 
         barra = new Sprite(40, 60, 170, 520, "imagenes/arkanoidbar.png", juego, juego.getVentana());
 
+        //Se le asigna una imagen al fondo
         try {
             fondo = ImageIO.read(new File("imagenes/akranoidbg.png"));
         } catch (IOException e) {
@@ -55,10 +76,15 @@ public class PantallaDeJuego implements Pantalla {
         Graphics g = fondo.getGraphics();
     }
 
+    /**
+     * Método que pinta todos los componentes del juego en sus respectivas posiciones
+     */
     @Override
     public void PintarPantalla(Graphics g) {
+        //Primero se reescala el fondo y se pinta en toda la pantalla
         fondoEscalado = fondo.getScaledInstance(juego.getWidth(), juego.getHeight(), Image.SCALE_SMOOTH);
         g.drawImage(fondoEscalado, 0, 0, null);
+        //Después se crea una línea de texto donde se mostrará la puntuación en todo momento
         if (g instanceof Graphics2D) {
             g.setColor(Color.WHITE);
             Graphics2D g2d = (Graphics2D) g;
@@ -66,6 +92,7 @@ public class PantallaDeJuego implements Pantalla {
         }
         g.drawString("PUNTUACIÓN:" + juego.getPuntuacion(), 15, 30);
 
+        //Finalmente se recorre la matriz de bloques y se pintan en la pantalla, seguidos de la barra y la bola
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 if (bloques[i][j] != null) {
@@ -82,6 +109,9 @@ public class PantallaDeJuego implements Pantalla {
 
     }
 
+    /**
+     * Método que comprueba si el jugador ha ganado recorriendo la matriz de bloques y comprobando si queda alguno
+     */
     public void ComprobarVictoria() {
         boolean victoria = false;
         int numBloques = bloques.length * bloques[0].length;
@@ -92,6 +122,7 @@ public class PantallaDeJuego implements Pantalla {
                 }
             }
         }
+        //Si el número de bloques es 0 se pasará a la pantalla de victoria
         victoria = numBloques == 0;
         if (victoria) {
             juego.setPantallaActual(new PantallaVictoria(juego));
@@ -100,6 +131,13 @@ public class PantallaDeJuego implements Pantalla {
         }
     }
 
+    /**
+     * Método que comprueba si la bola colisiona con otro sprite y modifica su velocidad en consecuencia
+     * 
+     * @param otro : sprite con el que se quiere comprobar si choca la bola
+     * 
+     * @return : devolverá true si la bola choca con el sprite y false si no lo hace
+     */
     public boolean ComprobarBola(Sprite otro) {
         if (bola.ColisionaAbajo(otro)) {
             bola.setVelY(Math.abs(bola.getVelY()) * -1);
@@ -116,10 +154,15 @@ public class PantallaDeJuego implements Pantalla {
         return false;
     }
 
+    /**
+     * Método que se ejecutará cada vez que se refresque la pantalla en el panel de juego
+     */
     @Override
     public void EjecutarFrame() {
+        //Primero se actualizan las posiciones de la barra y la bola en ese orden
         barra.actualizarPosicionBarra(bola);
         bola.actualizarPosicion();
+        //Después se comprueba se la bola colisiona con algún bloque, y si es así se elimina dicho bloque y se aumenta la puntuación
         for (int i = 0; i < bloques.length; i++) {
             for (int j = 0; j < bloques[0].length; j++) {
                 if (bloques[i][j] != null) {
@@ -130,10 +173,14 @@ public class PantallaDeJuego implements Pantalla {
                 }
             }
         }
+        //Finalmente se comprueba si la bola colisiona con la barra y si el jugador ha ganado
         ComprobarBola(barra);
         ComprobarVictoria();
     }
 
+    /**
+     * Método que pondrá la bola en marcha
+     */
     @Override
     public void ArrancarBola() {
         bola.setVelX(5);

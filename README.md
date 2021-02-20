@@ -1,14 +1,17 @@
-## Getting Started
+## Manual de usuario
+El objetivo del juego es destruir todos los bloques colocados en la pantalla haciendo chocar la bola contra ellos. Si la bola toca el extremo inferior de la pantalla el juego terminará con un game over. Para evitar esto dispondremos de una barra que podremos mover a izquierda y derecha para repeler la bola. Una vez destruidos todos los bloques ganaremos la partida.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Este juego se compone de 4 pantallas:
 
-## Folder Structure
+-Al comenzar se mostrará la pantalla de inicio. Para proceder al juego se deberá hacer click en cualquier parte de esta.
 
-The workspace contains two folders by default, where:
+-Una vez hecho clic se cargará la pantalla de juego, donde comenzará la partida real. En esta pantalla podremos mover la barra a izquierda y derecha utilizando las teclas
+de dirección (<- / ->) o las teclas A y D como alternativa.
+Antes de lanzar la bola, esta se moverá junto a la barra de forma horizontal. Una vez tengamos nuestra posición deseada deberemos pulsar
+la barra espaciadora para lanzar la bola. Una vez hecho esto la bola se moverá de forma independiente a nuestra barra.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+-Si ganamos la partidaSe cargará la pantalla de victoria donde podremos ver la puntuación total.
 
-## Dependency Management
+-Si perdemos la partida se mostrará la pantalla de game over con los puntos conseguidos hasta el momento.
 
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
+Tanto si ganamos como si perdemos el juego habrá terminado.
